@@ -1,0 +1,122 @@
+/* Navbar section css */
+
+.navbar {
+    background: #a66161;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    text-decoration: none;
+}
+
+.navbar_container {
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    z-index: 1;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 50px;
+    text-decoration: none;
+}
+
+#navbar_logo {
+    background-color: #f01405;
+    background-image: linear-gradient(to top, #8b7373 0%, #ffffff 100%);
+    background-size: 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 2.5rem;
+    text-decoration: none;
+}
+
+.fa_gem { 
+    /* this is the main icon */
+    margin-right: 0.5rem;
+} 
+
+.navbar_menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    text-align: center;
+    text-decoration: none;
+    padding: 0;
+    text-decoration: none;
+}
+
+.navbar_items {
+    height: 80px;
+    text-decoration: none;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    background-color: #c35757;
+    padding: 8px; /* Adjust the padding to control the separation */
+    text-decoration: none;
+}
+
+.navbar_links {
+    color: #fff;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none !important;
+    padding: 0 1rem;
+    height: 100%;
+    white-space: nowrap;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+    width: 100%;
+    text-decoration: none;
+}
+
+.navbar_links:hover {
+    background-color: #d1a9b3;
+    text-decoration: underline;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    background: #ff7062;
+    color: #fff;
+}
+
+.button:hover {
+    background: rgb(109, 9, 223);
+    transition: all 0.3s ease;
+}
