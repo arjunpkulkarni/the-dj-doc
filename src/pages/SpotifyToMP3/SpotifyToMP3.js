@@ -47,7 +47,6 @@ const SpotifyToMP3 = () => {
             <h1> Sign into Spotify </h1>
             <button onClick = {handleLogin}> Connect To Spotify </button>
             <SpotifyGetPlaylists />
-            <button>Convert to MP3</button>
         </div>
     );
     
