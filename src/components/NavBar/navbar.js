@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import "./navbar.css";
 import * as ROUTES from "../../constants/routes";
+import { RiAlbumFill } from 'react-icons/ri';
 
 const NavigationBar = () => {
     return (
@@ -9,8 +10,8 @@ const NavigationBar = () => {
             <nav className="navbar">
                 <div className="navbar_container">
                     <Link to = {ROUTES.HOME}>
-                        <div id="navbar_logo">
-                            <i className="fa-brands fa-gem"></i> DJ Doc
+                        <div id="navbar_logo" className='navbar_logo'>
+                            <RiAlbumFill className='main_icon'/> DJ Doc
                         </div>
                     </Link>
                     <div className="navbar_toggle" id="mobile-menu">

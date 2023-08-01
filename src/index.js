@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from "react-dom/client";
 import './main/index.css';
 import App from './main/App';
 import { FirebaseContext } from './context/FirebaseContext';
@@ -7,7 +7,7 @@ import { auth } from "./firebase/config";
 import { ProvideAuth } from './context/AuthContext';
 import reportWebVitals from './utils/reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <FirebaseContext.Provider value = {{ auth }}>

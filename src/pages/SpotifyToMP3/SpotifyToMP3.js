@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import SpotifyGetPlaylists from "./components/SpotifyGetPlaylists/SpotifyGetPlaylists";
 import "./spotifyToMP3.css";
 
 
@@ -45,6 +46,7 @@ const SpotifyToMP3 = () => {
         <div className = "container">
             <h1> Sign into Spotify </h1>
             <button onClick = {handleLogin}> Connect To Spotify </button>
+            <SpotifyGetPlaylists />
         </div>
     );
     

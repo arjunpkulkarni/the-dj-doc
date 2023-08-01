@@ -11,7 +11,6 @@ import SpotifyToMP3 from "../pages/SpotifyToMP3/SpotifyToMP3"; // Correct the im
 import AiBeats from "../pages/AIBeats/aiBeats";
 
 
-
 function App() {
   return (
     <Router>

@@ -1,25 +1,79 @@
-.container {
+/* Apply a modern font to the whole page */
+body {
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .container {
     margin: 200px auto;
-    width: 150px;
-}
-
-form {
+    max-width: 300px; /* Increase the width for a more comfortable form */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  form {
     box-sizing: border-box;
-}
-
-input {
+  }
+  
+  input {
     display: block;
-    padding: 10px;
-    border-radius: 5px;
     width: 100%;
-}
-
-button {
-    margin-top: 5px;
-}
-
-label {
-    display: block;
-    margin-top: 10px;
+    padding: 12px;
     margin-bottom: 10px;
-}
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box; /* Include padding in the element's total width */
+  }
+  
+  
+  /* Style the focus state for input fields */
+  input:focus {
+    outline: none;
+    border-color: #6c63ff;
+    box-shadow: 0 0 5px rgba(108, 99, 255, 0.5);
+  }
+  
+  /* Add a subtle border color change on hover */
+  input:hover {
+    border-color: #aaa;
+  }
+  
+  button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #6c63ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Add hover effect to the button */
+  button:hover {
+    background-color: #524dff;
+  }
+  
+  /* Center the button */
+  button {
+    margin: 10px auto;
+  }
+  
+  label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #444;
+  }
+  
+  /* Add a subtle box shadow on form hover */
+  .container:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  
