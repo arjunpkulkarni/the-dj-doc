@@ -36,8 +36,13 @@ const PlaylistTracks = ({ selectedPlaylistTracks }) => {
     fetchAllSongs();
   };
 
+  // Placeholder message when no tracks are selected
+  if (!selectedPlaylistTracks || selectedPlaylistTracks.length === 0) {
+    return <div className="playlist-tracks-container">No tracks selected.</div>;
+  }
+
   return (
-    <div>
+    <div className="playlist-tracks-container">
       <h3>Tracks of Selected Playlist:</h3>
       <ul>
         {selectedPlaylistTracks.map((track) => (

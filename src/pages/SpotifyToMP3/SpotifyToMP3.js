@@ -1,6 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SpotifyGetPlaylists from "./components/SpotifyGetPlaylists/SpotifyGetPlaylists";
 import "./spotifyToMP3.css";
+import PlaylistTracks from "./components/PlaylistTracks/PlaylistTracks";
+import JSZip from 'jszip';
+import axios from 'axios';
+import { saveAs } from 'file-saver'; // Import the 'file-saver' library
 
 
 const CLIENT_ID = "808ca3c84b71497f992a56543a4f41bc";
@@ -23,6 +27,8 @@ const getReturnedParamsFromSpotifyAuth = (hash) => {
   };
 
 const SpotifyToMP3 = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+
     useEffect(() => {
         if (window.location.hash) {
           const { access_token, expires_in, token_type } =
@@ -33,6 +39,7 @@ const SpotifyToMP3 = () => {
           localStorage.setItem("accessToken", access_token);
           localStorage.setItem("tokenType", token_type);
           localStorage.setItem("expiresIn", expires_in);
+          setLoggedIn(true);
           console.log("SpotifyToMP3 component rendered");
         }
     }, []);
@@ -43,12 +50,22 @@ const SpotifyToMP3 = () => {
     };
 
     return (
-        <div className = "container">
-            <h1> Sign into Spotify </h1>
-            <button onClick = {handleLogin}> Connect To Spotify </button>
-            <SpotifyGetPlaylists />
+    <div className="main-container-spotify">
+      {!loggedIn ? ( // Show the sign-in container if not logged in
+        <div className="sign-in-container">
+          <h1> Sign into Spotify </h1>
+          <button onClick={handleLogin}> Connect To Spotify </button>
         </div>
-    );
+      ) : (
+        // Show the get playlist container if logged in
+        <div className="get-playlist-container">
+          <h2>Get Playlists</h2>
+          <SpotifyGetPlaylists />
+        </div>
+      )}
+    </div>
+  );
+    
     
 };
 
