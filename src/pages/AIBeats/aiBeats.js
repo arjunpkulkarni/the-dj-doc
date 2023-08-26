@@ -100,7 +100,11 @@ const AiBeats = () => {
             },
           });
         
-          console.log(aiModelResponse.data);
+          const responseBody = JSON.parse(aiModelResponse.data.body);
+          const mixingScore = responseBody.mixing_score;
+          
+          console.log("Mixing Score:", mixingScore);
+
         } catch (error) {
           console.error("Axios Error:", error);
         }
