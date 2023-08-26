@@ -8,6 +8,10 @@ const SCOPES = ["user-read-private", "user-read-email"]; // Add more scopes if n
 const SCOPES_URL_PARAM = SCOPES.join("%20");
 const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
 
+const apiEndpoint = 'https://nn84xvqiji.execute-api.us-east-1.amazonaws.com/Mixmeister/api-mixmeister';
+const apiKey = 'y0r75sXT5F9KpMz5V7VV6aQfyTEkWiWK5gzB339q';
+const token = 'YOUR_AUTHORIZATION_TOKEN'; // Make sure you have a valid token
+
 const AiBeats = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -65,37 +69,49 @@ const AiBeats = () => {
           },
         }
       );
-
+  
       if (response.data) {
         const audioFeatures = response.data;
+  
+        // Extract the desired features
+        const selectedFeaturesArray = [
+          audioFeatures.acousticness,
+          audioFeatures.danceability,
+          audioFeatures.energy,
+          audioFeatures.instrumentalness,
+          audioFeatures.loudness,
+          audioFeatures.speechiness,
+          audioFeatures.tempo,
+          audioFeatures.valence
+        ];
 
-         // Extract the desired features
-      const selectedFeatures = {
-        acousticness: audioFeatures.acousticness,
-        danceability: audioFeatures.danceability,
-        energy: audioFeatures.energy,
-        instrumentalness: audioFeatures.instrumentalness,
-        loudness: audioFeatures.loudness,
-        speechiness: audioFeatures.speechiness,
-        tempo: audioFeatures.tempo,
-        valence: audioFeatures.valence,
-      };
+        const formattedArray = { data : selectedFeaturesArray }
+        
+  
+        console.log("Audio Features:", selectedFeaturesArray);
+  
+        try {
+          const aiModelResponse = await axios.post(apiEndpoint, formattedArray, {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              Authorization: `Bearer ${token}`,
+              "X-Api-Key": apiKey,
+              'Content-Type': 'application/json',
+            },
+          });
+        
+          console.log(aiModelResponse.data);
+        } catch (error) {
+          console.error("Axios Error:", error);
+        }
+        
 
-      console.log("Audio Features:", selectedFeatures);
-
-        // Now you can pass the audioFeatures to your AI model hosted on AWS
-        const aiModelResponse = await axios.post(
-          "https://runtime.sagemaker.us-east-1.amazonaws.com/endpoints/Custom-SKLearn-Model-2023-08-14-05-07-10/invocations",
-          selectedFeatures
-        );
-
-        console.log("AI Model Response:", aiModelResponse.data);
       }
     } catch (error) {
       console.error("Error fetching audio features:", error);
     }
   };
-
+  
   const handleLogin = () => {
     window.location = `${SPOTIFY_AUTHORIZE_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPES_URL_PARAM}&response_type=token&show_dialog=true`;
   };
