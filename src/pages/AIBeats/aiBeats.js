@@ -73,7 +73,7 @@ const AiBeats = () => {
           },
         }
       );
-  
+
       const trackResponse = await axios.get(
         `https://api.spotify.com/v1/tracks/${track.id}`,
         {
@@ -82,13 +82,13 @@ const AiBeats = () => {
           },
         }
       );
-  
+
       if (response.data) {
         const audioFeatures = response.data;
         // Return the year of the track
         const releaseDate = trackResponse.data.album.release_date;
         const year = parseInt(releaseDate.split('-')[0], 10); // Ensure year is an integer
-  
+
         // Extract the desired features
         const selectedFeaturesArray = [
           audioFeatures.acousticness,
@@ -100,11 +100,11 @@ const AiBeats = () => {
           audioFeatures.tempo,
           audioFeatures.valence
         ];
-  
+
         const formattedArray = { data: selectedFeaturesArray };
-  
+
         console.log("Audio Features:", selectedFeaturesArray);
-  
+
         try {
           const aiModelResponse = await axios.post(apiEndpoint, formattedArray, {
             headers: {
@@ -113,27 +113,27 @@ const AiBeats = () => {
               'Content-Type': 'application/json',
             },
           });
-  
+
           const responseBody = JSON.parse(aiModelResponse.data.body);
           const mixingScore = parseFloat(responseBody.mixing_score); // Ensure mixingScore is a double
-  
+
           console.log("Mixing Score:", mixingScore);
-  
+
           const app = new Realm.App({ id: "mixmeister-onfrh" });
-  
+
           // Create an anonymous credential
           const credentials = Realm.Credentials.anonymous();
-  
+
           // Authenticate the user
           const user = await app.logIn(credentials);
           // `App.currentUser` updates to match the logged-in user
           console.assert(user.id === app.currentUser.id);
-  
+
           // Ensure selectedGenre is a string
           if (typeof selectedGenre === "string") {
             const result = await user.functions.getTheSong(mixingScore, year, selectedGenre);
             console.log("Result:", JSON.stringify(result));
-  
+
             if (Array.isArray(result)) {
               console.log("Received song names:", result); // Log the parsed result
               setResult(result); // Set the result in state
@@ -158,71 +158,74 @@ const AiBeats = () => {
     setShowSearch(true); // Toggle to display the search input
     setResult(null); // Clear the result
   };
-  
+
   const handleLogin = () => {
     window.location = `${SPOTIFY_AUTHORIZE_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPES_URL_PARAM}&response_type=token&show_dialog=true`;
   };
 
+  // need to figure all genres i have and implement few changes and then work on css.
+  return (
+    <div>
+      <h1>MixMeister</h1>
+      {loggedIn ? (
+        <div>
+          {showSearch ? (
+            <div>
+              <div className="input-container">
+                <input
+                  type="text"
+                  placeholder="Search songs..."
+                  value={searchTerm}
+                  onChange={handleSearch}
+                />
+              </div>
+              {/* Genre selection dropdown in its own div */}
+              <div className="genre-container">
+                <label htmlFor="genre">Pick a Genre:</label>
+                <select
+                  id="genre"
+                  name="genre"
+                  onChange={(e) => setSelectedGenre(e.target.value)}
+                >
+                  <option value="Pop">Pop</option>
+                  <option value="Rap">Rap</option>
+                  <option value="Underground Rap">Underground Rap</option>
+                  <option value="Hiphop">Hiphop</option>
+                  <option value="Techno">Techno</option>
+                  <option value="RnB">RnB</option>
+                  <option value="Dark Trap">Dark Trap</option>
+                  <option value="Techno">Techno</option>
+                  <option value="Emo">Emo</option>
+                </select>
+              </div>
 
-return (
-  <div>
-    <h1>MixMeister</h1>
-    {loggedIn ? (
-      <div>
-        {showSearch ? ( // Conditionally render based on showSearch state
-          <div>
-            <div className="input-container">
-              <input
-                type="text"
-                placeholder="Search songs..."
-                value={searchTerm}
-                onChange={handleSearch}
-              />
+              <ul>
+                {searchResults.map((track) => (
+                  <li key={track.id}>
+                    <button className="track-button" onClick={() => handleTrackSelection(track)}>
+                      {track.name}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+
             </div>
-            <label htmlFor="genre">Pick a Genre:</label>
-            <select
-              id="genre"
-              name="genre"
-              onChange={(e) => setSelectedGenre(e.target.value)}
-            >
-            <option value="Pop">Pop</option>
-            <option value="Rap">Rap</option>
-            <option value="Underground Rap">Underground Rap</option>
-            <option value="Hiphop">Hiphop</option>
-            <option value="Techno">Techno</option>
-            <option value="RnB">RnB</option>
-            <option value="Dark Trap">Dark Trap</option>
-            <option value="Techno">Techno</option>
-            <option value="Emo">Emo</option>
-            </select>
-
-            <ul>
-              {searchResults.map((track) => (
-                <li key={track.id}>
-                  <button onClick={() => handleTrackSelection(track)}>
-                    {track.name}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : (
-          // Display result and back button
-          <div>
-            <button onClick={handleBackToSearch}>Back to Search</button>
-            <p>Result:</p>
-            <pre>{JSON.stringify(result, null, 2)}</pre>
-          </div>
-        )}
-      </div>
-    ) : (
-      <div className="button-container">
-        <p>Please log in to Spotify:</p>
-        <button onClick={handleLogin}>Log in</button>
-      </div>
-    )}
-  </div>
-);
+          ) : (
+            <div>
+              <button onClick={handleBackToSearch}>Back to Search</button>
+              <p>Result:</p>
+              <pre>{JSON.stringify(result, null, 2)}</pre>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="button-container">
+          <p className="login-text">Please log in to Spotify:</p>
+          <button onClick={handleLogin}>Log in</button>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default AiBeats;

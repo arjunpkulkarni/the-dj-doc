@@ -1,47 +1,131 @@
 /* Global styles */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Header styles */
-  h1 {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  /* Search bar styles */
-  .input-container {
-    text-align: center;
-    margin: 20px auto;
-  }
-  
-  input[type="text"] {
-    padding: 10px;
-    width: 100%;
-    max-width: 400px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  /* Button styles */
-  .button-container {
-    text-align: center;
-    margin: 10px auto;
-  }
-  
-  button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #1db954;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #14803c;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #e7e7e7; /* Background color for the entire page */
+}
+
+/* Style for the login-text class */
+.login-text {
+  padding: 10px; /* Add padding for better spacing */
+  font-size: 18px; /* Adjust the font size as needed */
+  font-weight: bold; /* Make the text bold */
+  color: #333; /* Text color */
+  text-align: center; /* Center-align text horizontally */
+  margin: 10px auto; /* Add margin to center the element horizontally */
+}
+
+
+/* Header styles */
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  padding: 0;
+  color: #333; /* Text color */
+}
+
+/* Search bar styles */
+.input-container {
+  text-align: center; /* Center-align text horizontally */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Center-align items vertically and horizontally */
+  margin: 20px auto;
+}
+
+input[type="text"] {
+  padding: 12px;
+  width: 100%;
+  max-width: 400px;
+  border: none;
+  border-radius: 5px;
+  text-align: center; /* Center-align text horizontally */
+  margin: 20px auto;
+  background-color: #fff; /* Background color */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  transition: box-shadow 0.3s ease-in-out; /* Smooth box shadow transition */
+}
+
+input[type="text"]:focus {
+  outline: none;
+  box-shadow: 0 2px 10px rgba(0, 123, 255, 0.3); /* Highlight on focus */
+}
+
+/* Button styles */
+.button-container {
+  text-align: center;
+  margin: 10px auto;
+  background-color: #e7e7e7;
+}
+
+button {
+  padding: 6px 12px; /* Adjust padding to make the button smaller */
+  font-size: 20px; /* Adjust font size to make the text smaller */
+  font-weight: bold;
+  background-color: #007bff;
+  color: rgb(243, 239, 239);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+
+button:hover {
+  background-color: #0056b3; /* Button color on hover */
+}
+
+/* Genre selection styles */
+.genre-container {
+  text-align: center; /* Center-align text horizontally */
+  margin-top: 20px; /* Add some top margin for spacing */
+}
+
+/* Style for the <label> element */
+.genre-container label {
+  font-size: 18px; /* Adjust font size */
+  color: #333; /* Text color */
+  margin-right: 10px; /* Right margin for spacing */
+}
+
+/* Style for the <select> element */
+.genre-container select {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.genre-container select:hover {
+  border-color: #007bff;
+}
+
+.genre-container select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+}
+
+/* Style for the <option> elements */
+.genre-container select option {
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+}
+
+ul {
+  list-style: none; /* Remove the default list-style type */
+  padding: 0; /* Remove default padding */
+  margin: 20px; /* Remove default margin */
+}
+
+/* Add margin to the track-button class */
+.track-button {
+  margin-left: 10px; /* Adjust the left margin as needed */
+  margin-right: 10px; /* Adjust the right margin as needed */
+}
