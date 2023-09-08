@@ -47,8 +47,9 @@
     font-family: 'REM', sans-serif;
 }
 
-#navbar_logo > a {
-    text-decoration: none !important; /* Remove underline from anchor element */
+.navbar_logo a {
+    text-decoration: none; /* Remove underline from anchor element */
+    color: black;
 }
 
 .main_icon { 

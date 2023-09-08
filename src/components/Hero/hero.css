@@ -2,27 +2,46 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100;500;900&family=Oswald:wght@600&family=REM:wght@900&display=swap');
 
-.main {
-    background: rgb(209,131,155);
-    background: linear-gradient(90deg, rgba(209,131,155,1) 4%, rgba(195,92,97,1) 13%, rgba(185,79,79,1) 22%, rgb(48, 21, 21) 36%, rgba(64,27,27,1) 49%, rgba(0,0,0,1) 100%);
-}
+/* YourHero.css */
 
-.main_container {
+/* Apply a modern font to the whole page */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+  }
+  
+  .main {
+    background: linear-gradient(90deg, rgba(209, 131, 155, 1) 4%, rgba(195, 92, 97, 1) 13%, rgba(185, 79, 79, 1) 22%, rgb(48, 21, 21) 36%, rgba(64, 27, 27, 1) 49%, rgba(0, 0, 0, 1) 100%);
+    /* Add parallax effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .main_container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     justify-self: center;
     margin: 0 auto;
     min-height: 100vh;
-    background: rgb(0,0,0);
-    background: linear-gradient(90deg, rgba(209,131,155,1) 4%, rgba(195,92,97,1) 13%, rgba(185,79,79,1) 22%, rgba(191,82,82,1) 36%, rgba(64,27,27,1) 49%, rgba(0,0,0,1) 100%);
+    background: linear-gradient(90deg, rgba(209, 131, 155, 1) 4%, rgba(195, 92, 97, 1) 13%, rgba(185, 79, 79, 1) 22%, rgba(191, 82, 82, 1) 36%, rgba(64, 27, 27, 1) 49%, rgba(0, 0, 0, 1) 100%);
     z-index: 1;
     width: 100%;
     max-width: 1300px;
     padding: 0 50px;
-}
-
-.main_content h1 {
+  }
+  
+  .main_content {
+    text-align: center; /* Center align text */
+    color: #fff;
+    padding: 20px; /* Add some padding for spacing */
+  }
+  
+  .main_content-h1 {
     font-size: 4rem;
     background-color: #f5efee;
     background-image: linear-gradient(to-top, #ff0444 0%, #e592a7 100%);
@@ -35,9 +54,11 @@
     -webkit-text-fill-color: transparent;
     -moz-text-fill-color: transparent;
     font-family: 'Oswald', sans-serif;
-}
-
-.main_content h2 {
+    /* Add animation here */
+    animation: fadeIn 2s ease-in-out;
+  }
+  
+  .main_content-h2 {
     font-size: 2rem;
     background-color: #ffffffef;
     background-image: linear-gradient(to-top, #f4eded 0%, #d1a9b3 100%);
@@ -46,21 +67,21 @@
     background-clip: text;
     -webkit-background-clip: text;
     -moz-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-text-fill-color: transparent;
     white-space: nowrap;
     font-family: 'Oswald', sans-serif;
-}
-
-.main_content p {
+    /* Add animation here */
+    animation: slideInLeft 1s ease-in-out;
+  }
+  
+  .main_content-p {
     font-size: 2rem;
     margin-top: 1rem;
     font-weight: 700;
-    color: #fff;
-    font-family: 'Oswald', sans-serif;
-}
-
-.main_btn {
+    /* Add animation here */
+    animation: fadeInUp 1s ease-in-out;
+  }
+  
+  .main_btn {
     font-size: 1rem;
     background-image: linear-gradient(to-top, #f77062 0%, #fe5102 100%);
     padding: 14px 32px;
@@ -72,17 +93,19 @@
     position: relative;
     outline: none;
     transition: all 0.35s;
-}
-
-.main_btn a {
+    /* Add animation here */
+    animation: pulse 1s ease infinite alternate;
+  }
+  
+  .main_btn a {
     position: relative;
     z-index: 2;
     color: rgb(0, 0, 0);
     text-decoration: none;
     font-family: 'Oswald', sans-serif;
-}
-
-.main_btn:after {
+  }
+  
+  .main_btn:after {
     position: absolute;
     content: "";
     top: 0;
@@ -91,23 +114,78 @@
     height: 100%;
     background: #5d0cd791;
     transition: all 0.35s;
-}
-
-.main_btn:hover {
+  }
+  
+  .main_btn:hover {
     color: #f4eded;
-}
-
-.main_btn:hover:after {
+  }
+  
+  .main_btn:hover:after {
     width: 100%;
-}
-
-.main_img-container {
+  }
+  
+  .main_img-container {
     text-align: right;
     margin-top: 60px;
-}
-
-.main_img {
-    max-height: 80%; /* You can use max-height or adjust height as needed */
-    max-width: 80%; /* You can use max-width or adjust width as needed */
-    margin-top: 120px; /* You can adjust the margin as per your requirement */
-}
+  }
+  
+  .main_img {
+    max-height: 80%;
+    max-width: 80%;
+    margin-top: 120px;
+    /* Add animation here */
+    animation: slideInRight 1s ease-in-out;
+  }
+  
+  /* Define keyframe animations for text and button */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInLeft {
+    0% {
+      transform: translateX(-50px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.05);
+    }
+  }
+  
+  @keyframes slideInRight {
+    0% {
+      transform: translateX(50px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  

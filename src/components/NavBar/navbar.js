@@ -9,11 +9,15 @@ const NavigationBar = () => {
         <header>
             <nav className="navbar">
                 <div className="navbar_container">
-                    <Link to = {ROUTES.HOME}>
-                        <div id="navbar_logo" className='navbar_logo'>
-                            <RiAlbumFill className='main_icon'/> DJ Doc
+                    <Link to={ROUTES.HOME}>
+                        <div id="navbar_logo" className="navbar_logo">
+                            <div className="logo-content">
+                                <RiAlbumFill className="main_icon" />
+                                DJ Doc
+                            </div>
                         </div>
                     </Link>
+
                     <div className="navbar_toggle" id="mobile-menu">
                         <span className="bar"></span>
                         <span className="bar"></span>
@@ -21,13 +25,13 @@ const NavigationBar = () => {
                     </div>
                     <ul className="navbar_menu">
                         <li className="navbar_item">
-                            <Link to= {ROUTES.AIBEATS} className="navbar_links">
+                            <Link to={ROUTES.AIBEATS} className="navbar_links">
                                 AI Beats
                             </Link>
                         </li>
 
                         <li className="navbar_item">
-                            <Link to= {ROUTES.SPOTIFYCONVERT} className="navbar_links">
+                            <Link to={ROUTES.SPOTIFYCONVERT} className="navbar_links">
                                 <i className="fa-brands fa-spotify"></i>
                                 <span style={{ marginLeft: '5px' }}>Converter</span>
                             </Link>
@@ -40,7 +44,7 @@ const NavigationBar = () => {
                         </li>
 
                         <li className="navbar_btn">
-                            <Link to = {ROUTES.SIGN_UP} className="button">
+                            <Link to={ROUTES.SIGN_UP} className="button">
                                 <i className="fa-solid fa-circle-user"></i>
                             </Link>
                         </li>
