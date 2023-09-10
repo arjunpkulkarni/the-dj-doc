@@ -14,10 +14,30 @@ const apiEndpoint = 'https://nn84xvqiji.execute-api.us-east-1.amazonaws.com/Mixm
 const apiKey = 'y0r75sXT5F9KpMz5V7VV6aQfyTEkWiWK5gzB339q';
 
 const AiBeats = () => {
+  const getGenre = () => {
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * max);
+    }
+
+    const genres = ["Pop", "Rap", "Techno", "Emo"]; // Make sure genre names match the options in your select input
+    const numGenres = getRandomInt(genres.length) + 1; // Ensure at least one genre is selected
+
+    const selectedGenres = [];
+
+    for (let i = 0; i < numGenres; i++) {
+      const randomIndex = getRandomInt(genres.length);
+      selectedGenres.push(genres[randomIndex]);
+    }
+
+    return selectedGenres.join(' '); // Join selected genres into a single string
+  };
+
+
+
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [selectedGenre, setSelectedGenre] = useState("Pop");
+  const [selectedGenre, setSelectedGenre] = useState(getGenre());
   const [result, setResult] = useState(null); // State to store the result
   const [showSearch, setShowSearch] = useState(true); // State to toggle between search and result
 
@@ -165,12 +185,13 @@ const AiBeats = () => {
 
   // need to figure all genres i have and implement few changes and then work on css.
   return (
-    <div>
-      <h1>MixMeister</h1>
+    <div className="content-container"> {/* Add the content container */}
+      <h1 className="h1_aiBeats" style={{ marginBottom: '0', color: '#007bff' }}>MixMeister</h1>
+
       {loggedIn ? (
         <div>
           {showSearch ? (
-            <div>
+            <div className="search-container"> {/* Add the search container */}
               <div className="input-container">
                 <input
                   type="text"
@@ -185,6 +206,7 @@ const AiBeats = () => {
                 <select
                   id="genre"
                   name="genre"
+                  value={selectedGenre}
                   onChange={(e) => setSelectedGenre(e.target.value)}
                 >
                   <option value="Pop">Pop</option>
@@ -194,7 +216,6 @@ const AiBeats = () => {
                   <option value="Techno">Techno</option>
                   <option value="RnB">RnB</option>
                   <option value="Dark Trap">Dark Trap</option>
-                  <option value="Techno">Techno</option>
                   <option value="Emo">Emo</option>
                 </select>
               </div>
@@ -211,21 +232,24 @@ const AiBeats = () => {
 
             </div>
           ) : (
-            <div>
-              <button onClick={handleBackToSearch}>Back to Search</button>
-              <p>Result:</p>
-              <pre>{JSON.stringify(result, null, 2)}</pre>
+            <div className="result-container"> {/* Add the result container */}
+              <button onClick={handleBackToSearch} className="back-button">
+                Back to Search
+              </button>
+              <p className="result-title">Result:</p>
+              <pre className="result-json">{JSON.stringify(result, null, 2)}</pre>
             </div>
+
           )}
         </div>
       ) : (
-        <div className="button-container">
-          <p className="login-text">Please log in to Spotify:</p>
+        <div className="button-container"> {/* Add the button container */}
           <button onClick={handleLogin}>Log in</button>
         </div>
       )}
     </div>
   );
 };
+
 
 export default AiBeats;

@@ -3,35 +3,42 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #e7e7e7; /* Background color for the entire page */
-}
-
-/* Style for the login-text class */
-.login-text {
-  padding: 10px; /* Add padding for better spacing */
-  font-size: 18px; /* Adjust the font size as needed */
-  font-weight: bold; /* Make the text bold */
+  background: #f8f4f5;
   color: #333; /* Text color */
-  text-align: center; /* Center-align text horizontally */
-  margin: 10px auto; /* Add margin to center the element horizontally */
 }
 
+ul {
+  list-style: none; /* Remove the default list-style type */
+  padding: 0; /* Remove default padding */
+  margin: 20px; /* Remove default margin */
+}
 
-/* Header styles */
-h1 {
+/* Centered content container */
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh; /* Make the container cover the entire viewport height */
+}
+
+.header-container {
   text-align: center;
-  margin-top: 20px;
-  padding: 0;
-  color: #333; /* Text color */
+  margin-top: 10px; /* You can adjust this margin as needed */
+}
+
+h1 {
+  font-size: 36px; /* Larger font size for the heading */
+  color: #007bff; /* Modern blue color for headings */
+  margin-top: 0; /* Remove the top margin for h1 */
 }
 
 /* Search bar styles */
-.input-container {
-  text-align: center; /* Center-align text horizontally */
+.search-container {
+  text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center; /* Center-align items vertically and horizontally */
+  align-items: center;
   margin: 20px auto;
 }
 
@@ -41,53 +48,29 @@ input[type="text"] {
   max-width: 400px;
   border: none;
   border-radius: 5px;
-  text-align: center; /* Center-align text horizontally */
+  text-align: center;
   margin: 20px auto;
-  background-color: #fff; /* Background color */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  transition: box-shadow 0.3s ease-in-out; /* Smooth box shadow transition */
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 input[type="text"]:focus {
   outline: none;
-  box-shadow: 0 2px 10px rgba(0, 123, 255, 0.3); /* Highlight on focus */
-}
-
-/* Button styles */
-.button-container {
-  text-align: center;
-  margin: 10px auto;
-  background-color: #e7e7e7;
-}
-
-button {
-  padding: 6px 12px; /* Adjust padding to make the button smaller */
-  font-size: 20px; /* Adjust font size to make the text smaller */
-  font-weight: bold;
-  background-color: #007bff;
-  color: rgb(243, 239, 239);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-
-
-button:hover {
-  background-color: #0056b3; /* Button color on hover */
+  box-shadow: 0 2px 10px rgba(0, 123, 255, 0.3);
 }
 
 /* Genre selection styles */
 .genre-container {
-  text-align: center; /* Center-align text horizontally */
-  margin-top: 20px; /* Add some top margin for spacing */
+  text-align: center;
+  margin-top: 20px;
 }
 
 /* Style for the <label> element */
 .genre-container label {
-  font-size: 18px; /* Adjust font size */
-  color: #333; /* Text color */
-  margin-right: 10px; /* Right margin for spacing */
+  font-size: 18px;
+  color: #333;
+  margin-right: 10px;
 }
 
 /* Style for the <select> element */
@@ -111,21 +94,64 @@ button:hover {
   box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
 }
 
-/* Style for the <option> elements */
-.genre-container select option {
+/* Button styles */
+.button-container {
+  text-align: center;
+  margin: 10px auto;
+  background-color: #f8f4f5;
+}
+
+button {
+  padding: 12px 80px; /* Increased padding for better clickability */
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Result styles */
+.result-container {
   background-color: #fff;
-  color: #333;
-  font-size: 16px;
+  padding: 20px;
+  border: 1px solid #e0e0e0; /* Light gray border */
+  border-radius: 5px;
+  margin-top: 20px;
 }
 
-ul {
-  list-style: none; /* Remove the default list-style type */
-  padding: 0; /* Remove default padding */
-  margin: 20px; /* Remove default margin */
+.back-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px 24px; /* Increased padding for better clickability */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-/* Add margin to the track-button class */
-.track-button {
-  margin-left: 10px; /* Adjust the left margin as needed */
-  margin-right: 10px; /* Adjust the right margin as needed */
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+.result-title {
+  font-size: 24px; /* Larger font size for result title */
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.result-json {
+  background-color: #f5f5f5; /* Lighter gray background */
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  font-size: 16px; /* Slightly larger font size */
+  color: #333; /* Text color */
+  overflow-x: auto;
 }

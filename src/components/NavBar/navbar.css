@@ -30,7 +30,7 @@
 
 #navbar_logo {
     background-color: #ffffff;
-    background-image: linear-gradient(to top, #8b7373 0%, #ffffff 100%);
+    background-image: #ffffff;
     background-size: 100%;
     background-clip: text;
     -webkit-background-clip: text;
@@ -45,6 +45,10 @@
     font-size: 2.5rem;
     text-decoration: none;
     font-family: 'REM', sans-serif;
+}
+
+.navbar_link {
+    text-decoration: none;
 }
 
 .navbar_logo a {

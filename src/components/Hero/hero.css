@@ -1,14 +1,15 @@
 /* Hero section css */
 
 @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100;500;900&family=Oswald:wght@600&family=REM:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;500;900&display=swap');
 
 /* YourHero.css */
 
 /* Apply a modern font to the whole page */
-body {
+body, .main_content h1, .main_content h2, .main_content p, .main_btn a {
     font-family: 'Montserrat', sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
+    margin: 25;
+    align-content: flex-start;
   }
   
   .main {
@@ -74,12 +75,28 @@ body {
   }
   
   .main_content-p {
-    font-size: 2rem;
+    font-size: 1.5rem; /* Adjust font size for readability */
+    line-height: 1.6; /* Increase line height for better spacing */
     margin-top: 1rem;
-    font-weight: 700;
+    font-weight: bold; /* Increase font weight for emphasis */
+    color: #333; /* Choose an appropriate text color */
+    text-align: center; /* Center-align the text horizontally */
+    padding: 10px; /* Add padding for spacing */
+    border: 2px solid #6c63ff; /* Add a border for visual interest */
+    border-radius: 10px; /* Round the corners of the text box */
+    background-color: #fff; /* Add a background color to the text box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth color transition on hover */
     /* Add animation here */
     animation: fadeInUp 1s ease-in-out;
   }
+  
+  /* Add hover effect */
+  .main_content-p:hover {
+    background-color: #6c63ff; /* Change background color on hover */
+    color: #fff; /* Change text color on hover */
+  }
+  
   
   .main_btn {
     font-size: 1rem;
@@ -87,7 +104,7 @@ body {
     padding: 14px 32px;
     border: none;
     border-radius: 4px;
-    color: rgb(16, 113, 210);
+    color: rgb(107 99 255);
     margin-top: 1rem;
     cursor: pointer;
     position: relative;
@@ -100,9 +117,8 @@ body {
   .main_btn a {
     position: relative;
     z-index: 2;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     text-decoration: none;
-    font-family: 'Oswald', sans-serif;
   }
   
   .main_btn:after {
