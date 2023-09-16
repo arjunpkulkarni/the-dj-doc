@@ -1,11 +1,18 @@
 /* Global styles */
+@font-face {
+  font-family: 'Maddac Regular';
+  src: url(/Users/arjunkulkarni/Desktop/the-dj-doc/src/fonts/Maddac.ttf);
+}
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Maddac Regular', Arial, sans-serif;
   margin: 0;
   padding: 0;
   background: #f8f4f5;
   color: #333; /* Text color */
 }
+
+
 
 ul {
   list-style: none; /* Remove the default list-style type */
@@ -15,6 +22,7 @@ ul {
 
 /* Centered content container */
 .content-container {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,11 +43,21 @@ h1 {
 
 /* Search bar styles */
 .search-container {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px auto;
+  margin-top: 20px;
+  background-color: #fff; /* White background for the search container */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Style the input and select elements */
+.input-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
 input[type="text"] {
@@ -105,7 +123,7 @@ button {
   padding: 12px 80px; /* Increased padding for better clickability */
   font-size: 18px;
   font-weight: bold;
-  background-color: #007bff;
+  background-color: rgba(0, 123, 255, 0.8);
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -127,7 +145,7 @@ button:hover {
 }
 
 .back-button {
-  background-color: #007bff;
+  background-color: rgba(0, 123, 255, 0.8);
   color: #fff;
   padding: 12px 24px; /* Increased padding for better clickability */
   border: none;
@@ -155,3 +173,45 @@ button:hover {
   color: #333; /* Text color */
   overflow-x: auto;
 }
+
+.related-artists-container {
+  margin-top: 20px;
+}
+
+/* Style the artist buttons */
+.artist-button {
+  background-color: rgba(0, 123, 255, 0.8); /* Semi-transparent blue background */
+  color: #fff; /* White text color */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.artist-button:hover {
+  background-color: #007bff; /* Blue background on hover */
+  opacity: 0.9; /* Slightly reduce opacity on hover */
+}
+
+/* Style the album buttons */
+.album-button {
+  background-color: rgba(0, 123, 255, 0.8); /* Semi-transparent blue background */
+  color: #fff; /* White text color */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.album-button:hover {
+  background-color: #007bff; /* Blue background on hover */
+  opacity: 0.9; /* Slightly reduce opacity on hover */
+}
+
+

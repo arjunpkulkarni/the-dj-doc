@@ -5,15 +5,16 @@
 
 /* YourHero.css */
 
+
 /* Apply a modern font to the whole page */
 body, .main_content h1, .main_content h2, .main_content p, .main_btn a {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Maddac Regular', 'Montserrat', sans-serif;
     margin: 25;
     align-content: flex-start;
   }
   
   .main {
-    background: linear-gradient(90deg, rgba(209, 131, 155, 1) 4%, rgba(195, 92, 97, 1) 13%, rgba(185, 79, 79, 1) 22%, rgb(48, 21, 21) 36%, rgba(64, 27, 27, 1) 49%, rgba(0, 0, 0, 1) 100%);
+    background: linear-gradient(90deg, rgba(209, 131, 155, 1) 4%, rgba(195, 92, 97, 1) 13%, rgba(185, 79, 79, 1) 22%, rgba(191, 82, 82, 1) 36%, rgba(64, 27, 27, 1) 49%, rgba(0, 0, 0, 1) 100%);
     /* Add parallax effect */
     background-attachment: fixed;
     background-position: center;

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./aiBeats.css";
 import axios from "axios";
-//@ts-ignore
 import * as Realm from "realm-web";
 
 const CLIENT_ID = "ee3d1fd364864c578a8925749a35227a";
@@ -10,8 +9,9 @@ const SCOPES = ["user-read-private", "user-read-email"]; // Add more scopes if n
 const SCOPES_URL_PARAM = SCOPES.join("%20");
 const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
 
-const apiEndpoint = 'https://nn84xvqiji.execute-api.us-east-1.amazonaws.com/Mixmeister/api-mixmeister';
-const apiKey = 'y0r75sXT5F9KpMz5V7VV6aQfyTEkWiWK5gzB339q';
+const apiEndpoint =
+  "https://nn84xvqiji.execute-api.us-east-1.amazonaws.com/Mixmeister/api-mixmeister";
+const apiKey = "y0r75sXT5F9KpMz5V7VV6aQfyTEkWiWK5gzB339q";
 
 const AiBeats = () => {
   const getGenre = () => {
@@ -29,10 +29,26 @@ const AiBeats = () => {
       selectedGenres.push(genres[randomIndex]);
     }
 
-    return selectedGenres.join(' '); // Join selected genres into a single string
+    return selectedGenres.join(" "); // Join selected genres into a single string
   };
 
+  const preprocessResult = (result) => {
+    // Remove empty strings, square brackets, and duplicates
+    const processedResult = result.filter((item, index, self) => {
+      return (
+        item.trim() !== "" &&
+        item.trim() !== "[]" &&
+        self.indexOf(item) === index
+      );
+    });
 
+    // Number the items
+    const numberedResult = processedResult.map((item, index) => {
+      return `${index + 1}. ${item}`;
+    });
+
+    return numberedResult;
+  };
 
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -40,6 +56,11 @@ const AiBeats = () => {
   const [selectedGenre, setSelectedGenre] = useState(getGenre());
   const [result, setResult] = useState(null); // State to store the result
   const [showSearch, setShowSearch] = useState(true); // State to toggle between search and result
+  const [showRelatedArtists, setShowRelatedArtists] = useState(false);
+  const [randomArtists, setRandomArtists] = useState([]);
+  const [artistAlbums, setArtistAlbums] = useState([]);
+  const [selectedArtist, setSelectedArtist] = useState(null);
+  const [albumSongs, setAlbumSongs] = useState([]);
 
   useEffect(() => {
     if (window.location.hash) {
@@ -84,6 +105,8 @@ const AiBeats = () => {
   };
 
   const handleTrackSelection = async (track) => {
+    console.log("handleTrackSelection called with track:", track);
+
     try {
       const response = await axios.get(
         `https://api.spotify.com/v1/audio-features/${track.id}`,
@@ -107,7 +130,7 @@ const AiBeats = () => {
         const audioFeatures = response.data;
         // Return the year of the track
         const releaseDate = trackResponse.data.album.release_date;
-        const year = parseInt(releaseDate.split('-')[0], 10); // Ensure year is an integer
+        const year = parseInt(releaseDate.split("-")[0], 10); // Ensure year is an integer
 
         // Extract the desired features
         const selectedFeaturesArray = [
@@ -118,21 +141,33 @@ const AiBeats = () => {
           audioFeatures.loudness,
           audioFeatures.speechiness,
           audioFeatures.tempo,
-          audioFeatures.valence
+          audioFeatures.valence,
         ];
 
         const formattedArray = { data: selectedFeaturesArray };
 
         console.log("Audio Features:", selectedFeaturesArray);
 
+        // Extract the artist ID from the first artist of the track
+        const artistId = track.artists[0].id;
+
+        // Call the fetchRelatedArtists function with the artist ID
+        await fetchRelatedArtists(artistId);
+
+        setShowRelatedArtists(true);
+
         try {
-          const aiModelResponse = await axios.post(apiEndpoint, formattedArray, {
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-              "X-Api-Key": apiKey,
-              'Content-Type': 'application/json',
-            },
-          });
+          const aiModelResponse = await axios.post(
+            apiEndpoint,
+            formattedArray,
+            {
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+                "X-Api-Key": apiKey,
+                "Content-Type": "application/json",
+              },
+            }
+          );
 
           const responseBody = JSON.parse(aiModelResponse.data.body);
           const mixingScore = parseFloat(responseBody.mixing_score); // Ensure mixingScore is a double
@@ -151,7 +186,11 @@ const AiBeats = () => {
 
           // Ensure selectedGenre is a string
           if (typeof selectedGenre === "string") {
-            const result = await user.functions.getTheSong(mixingScore, year, selectedGenre);
+            const result = await user.functions.getTheSong(
+              mixingScore,
+              year,
+              selectedGenre
+            );
             console.log("Result:", JSON.stringify(result));
 
             if (Array.isArray(result)) {
@@ -179,19 +218,155 @@ const AiBeats = () => {
     setResult(null); // Clear the result
   };
 
+  const fetchRelatedArtists = async (artistId) => {
+    console.log("Fetch Related Artists Called");
+
+    try {
+      const accessToken = localStorage.getItem("accessToken"); // Replace with your Spotify access token
+      const apiUrl = `https://api.spotify.com/v1/artists/${artistId}/related-artists`;
+
+      const response = await axios.get(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      // Handle the response data (list of related artists)
+      const relatedArtists = response.data.artists;
+
+      // Shuffle the relatedArtists array to randomize the order
+      const shuffledArtists = shuffleArray(relatedArtists);
+
+      // Take the first 5 artists from the shuffled array
+      const randomArtists = shuffledArtists.slice(0, 5);
+
+      setRandomArtists(randomArtists);
+
+      // Print the names of the randomly selected artists
+      randomArtists.forEach((artist) => {
+        console.log("Randomly Selected Artist Name:", artist.name);
+      });
+
+      // You can perform further actions with the randomly selected artists' data here
+    } catch (error) {
+      // Handle errors
+      console.error("Error fetching related artists:", error);
+    }
+  };
+
+  const fetchArtistAlbums = async (artistId) => {
+    // console.log(`Fetching albums for artist with ID: ${artistId}`);
+    try {
+      const accessToken = localStorage.getItem("accessToken"); // Replace with your Spotify access token
+      const apiUrl = `https://api.spotify.com/v1/artists/${artistId}/albums?limit=50`;
+
+      const response = await axios.get(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (response.data && response.data.items) {
+        const albums = response.data.items;
+
+        // Shuffle the albums array to randomize the order
+        const shuffledAlbums = shuffleArray(albums);
+
+        // Take the first 5 albums from the shuffled array
+        const randomAlbums = shuffledAlbums.slice(0, 5);
+
+        // Log the names of the randomly selected albums
+        randomAlbums.forEach((album) => {
+          console.log("Randomly Selected Album Name:", album.name);
+        });
+
+        setArtistAlbums(randomAlbums);
+        setSelectedArtist(artistId);
+
+        // You can perform further actions with the randomly selected albums' data here
+      } else {
+        console.error("Invalid response from Spotify API");
+      }
+    } catch (error) {
+      // Handle errors
+      console.error("Error fetching artist albums:", error);
+    }
+  };
+
+  const fetchAlbumSongs = async (albumId) => {
+    try {
+      const accessToken = localStorage.getItem("accessToken"); // Replace with your Spotify access token
+      const apiUrl = `https://api.spotify.com/v1/albums/${albumId}/tracks?limit=10`;
+
+      const response = await axios.get(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (response.data && response.data.items) {
+        const albums = response.data.items;
+
+        // Shuffle the albums array to randomize the order
+        const shuffledAlbums = shuffleArray(albums);
+
+        // Take the first 5 albums from the shuffled array
+        const randomAlbums = shuffledAlbums.slice(0, 5);
+
+        // Log the names of the randomly selected albums
+        randomAlbums.forEach((album) => {
+          console.log("Randomly Selected Album Name:", album.name);
+        });
+
+        // You can perform further actions with the randomly selected albums' data here
+      } else {
+        console.error("Invalid response from Spotify API");
+      }
+    } catch (error) {
+      // Handle errors
+      console.error("Error fetching artist albums:", error);
+    }
+  }
+
+  // Function to shuffle an array randomly
+  const shuffleArray = (array) => {
+    let currentIndex = array.length,
+      randomIndex,
+      temporaryValue;
+
+    // While there remain elements to shuffle...
+    while (currentIndex !== 0) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  };
+
   const handleLogin = () => {
     window.location = `${SPOTIFY_AUTHORIZE_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPES_URL_PARAM}&response_type=token&show_dialog=true`;
   };
 
   // need to figure all genres i have and implement few changes and then work on css.
   return (
-    <div className="content-container"> {/* Add the content container */}
-      <h1 className="h1_aiBeats" style={{ marginBottom: '0', color: '#007bff' }}>MixMeister</h1>
+    <div className="content-container">
+      <h1
+        className="h1_aiBeats"
+        style={{ marginBottom: "0", color: "#007bff" }}
+      >
+        MixMeister
+      </h1>
 
       {loggedIn ? (
         <div>
           {showSearch ? (
-            <div className="search-container"> {/* Add the search container */}
+            <div className="search-container">
               <div className="input-container">
                 <input
                   type="text"
@@ -200,7 +375,6 @@ const AiBeats = () => {
                   onChange={handleSearch}
                 />
               </div>
-              {/* Genre selection dropdown in its own div */}
               <div className="genre-container">
                 <label htmlFor="genre">Pick a Genre:</label>
                 <select
@@ -219,37 +393,65 @@ const AiBeats = () => {
                   <option value="Emo">Emo</option>
                 </select>
               </div>
-
               <ul>
                 {searchResults.map((track) => (
                   <li key={track.id}>
-                    <button className="track-button" onClick={() => handleTrackSelection(track)}>
+                    <button
+                      className="track-button"
+                      onClick={() => handleTrackSelection(track)}
+                    >
                       {track.name}
                     </button>
                   </li>
                 ))}
               </ul>
-
             </div>
           ) : (
-            <div className="result-container"> {/* Add the result container */}
+            <div className="result-container">
               <button onClick={handleBackToSearch} className="back-button">
                 Back to Search
               </button>
               <p className="result-title">Result:</p>
-              <pre className="result-json">{JSON.stringify(result, null, 2)}</pre>
+              <pre className="result-json">
+                {JSON.stringify(preprocessResult(result), null, 2)}
+              </pre>
+              <div className="related-artists-container">
+                <h2>Related Artists:</h2>
+                <ul>
+                  {randomArtists.map((artist, index) => (
+                    <li key={index}>
+                      <button
+                        className="artist-button"
+                        onClick={() => fetchArtistAlbums(artist.id)}
+                      >
+                        {artist.name}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {selectedArtist && (
+                <div className="album-container">
+                  <h2>Albums:</h2>
+                  <ul>
+                    {artistAlbums.map((album) => (
+                      <li key={album.id}>
+                        <button className="album-button">{album.name}</button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
-
           )}
         </div>
       ) : (
-        <div className="button-container"> {/* Add the button container */}
-          <button onClick={handleLogin}>Log in</button>
+        <div className="button-container">
+          <button onClick={handleLogin}>Connect</button>
         </div>
       )}
     </div>
   );
 };
-
 
 export default AiBeats;
