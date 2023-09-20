@@ -40,6 +40,7 @@
     "typeorm": "^0.3.17",
     "url": "^0.11.1",
     "util": "^0.12.5",
+    "wavesurfer.js": "^7.3.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

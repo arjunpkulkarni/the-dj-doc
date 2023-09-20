@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import "/Users/arjunkulkarni/Desktop/the-dj-doc/src/pages/SetBuilder/setBuilder.css";
 import OpenAI from "openai";
 
+
 const openai = new OpenAI({
-  apiKey: "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",
+  apiKey: "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",
   dangerouslyAllowBrowser: true,
 });
 

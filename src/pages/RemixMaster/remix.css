@@ -1,0 +1,55 @@
+.remix-master-container {
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  input[type="file"] {
+    display: none;
+  }
+  
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #0073e6; /* Blue background color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease; /* Add a smooth color transition */
+  }
+  
+  button:hover {
+    background-color: #005bb8; /* Darker blue on hover */
+  }
+  
+  #waveform {
+    width: 100%;
+    max-width: 600px; /* Limit the waveform width for a cleaner look */
+    height: 200px;
+    margin-top: 20px;
+    background-color: #f0f0f0;
+    color: #637180;
+    border-radius: 5px;
+  }
+  
+  .drag-drop-container {
+    border: 2px dashed #637180; /* Blue dashed border */
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .drag-drop-text {
+    margin-top: 10px;
+    color: #888;
+  }
+  
+  /* Add more styling as needed */
+  
