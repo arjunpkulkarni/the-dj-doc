@@ -1,55 +1,128 @@
+/* Apply styles to the entire page */
+/* Style for the container */
 .remix-master-container {
-    text-align: center;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
-  
-  input[type="file"] {
-    display: none;
-  }
-  
-  button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    color: #fff;
-    background-color: #0073e6; /* Blue background color */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease; /* Add a smooth color transition */
-  }
-  
-  button:hover {
-    background-color: #005bb8; /* Darker blue on hover */
-  }
-  
-  #waveform {
-    width: 100%;
-    max-width: 600px; /* Limit the waveform width for a cleaner look */
-    height: 200px;
-    margin-top: 20px;
-    background-color: #f0f0f0;
-    color: #637180;
-    border-radius: 5px;
-  }
-  
-  .drag-drop-container {
-    border: 2px dashed #637180; /* Blue dashed border */
-    padding: 20px;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .drag-drop-text {
-    margin-top: 10px;
-    color: #888;
-  }
-  
-  /* Add more styling as needed */
-  
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  max-width: 1400px;
+  height: 100vh; /* Fill the entire viewport height */
+}
+
+
+/* Style for the title */
+.title_box {
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 100px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 40px; /* Remove margin to prevent spacing above the title */
+}
+
+.title {
+  font-size: 45px;
+}
+
+/* Style for the buttons */
+.button_open_container{
+  text-align: center; /* Center buttons */
+  margin: 20px 0; /* Add spacing between buttons and other elements */
+  position: absolute;
+  top: 175px;
+  right: 475px
+}
+
+.button_play_container {
+  text-align: center; /* Center buttons */
+  margin: 20px 0; /* Add spacing between buttons and other elements */
+  position: absolute;
+  top: 175px;
+  right: 775px;
+}
+
+.button_open,
+.button_play {
+  display: flex;
+  align-items: center; /* Center content vertically */
+  justify-content: center; /* Center content horizontally */
+  width: 20px; /* Set a fixed width */
+  height: 50px; /* Set a fixed height */
+  font-size: 14px;
+  margin: 10px;
+}
+
+
+button:hover {
+  background-color: #005bb8;
+}
+
+/* Style for the waveform container */
+#waveform {
+  width: 100%;
+  height: 150px;
+  margin-top: 20px; /* Add spacing below the buttons */
+  background-color: #f0f0f0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  margin-top: 30px;
+
+}
+
+/* Custom styling for the actual waveform canvas (adjust as needed) */
+#waveform canvas {
+  width: 100%;
+  height: 100%;
+  margin-top: 30px;
+}
+
+/* Custom styling for the waveform progress bar (adjust as needed) */
+#waveform .wavesurfer-progress {
+  height: 100%;
+  background-color: #0073e6;
+  opacity: 0.6;
+}
+
+/* Style for input elements */
+input[type="file"],
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 30px;
+}
+
+.editor_container {
+  margin-top: 80px;
+}
+
+.toolbar {
+  background-color: #0073e6;
+  color: #fff;
+  padding: 10px 0; /* Add padding as needed (vertically) and remove horizontal padding */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.toolbar-button {
+  background-color: #0073e6;
+  color: #fff;
+  border: none;
+  border-radius: 0; /* Remove border radius */
+  padding: 10px 0; /* Add padding as needed (vertically) and remove horizontal padding */
+  flex-grow: 1; /* Allow buttons to grow and fill the available space */
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.toolbar-button:hover {
+  background-color: #005bb8;
+}
+
+
+
