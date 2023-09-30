@@ -48,6 +48,7 @@ h1 {
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin-right: 20px;
 }
 
 /* Style the input and select elements */
@@ -142,6 +143,7 @@ button:hover {
   border: 1px solid #e0e0e0; /* Light gray border */
   border-radius: 5px;
   margin-top: 20px;
+  margin-right: 50px;
 }
 
 .back-button {
@@ -214,4 +216,54 @@ button:hover {
   opacity: 0.9; /* Slightly reduce opacity on hover */
 }
 
+/* CSS for the songs container */
+.songs-container {
+  position: absolute;
+  top: 175px; /* Adjust top positioning as needed */
+  right: 150px; /* Adjust right positioning as needed */
+  width: 20%; /* Adjust the width as needed */
+  height: 30%; /* Adjust the height as needed */
+  background-color: #ffffff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px; /* You can adjust the radius as needed */
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+  margin-left: 20px;
+}
 
+/* CSS for the Songs heading */
+.songs-container h2 {
+  font-size: 24px; /* Larger font size */
+  color: #333;
+  margin-bottom: 16px; /* More spacing below the heading */
+}
+
+/* CSS for the songs list */
+.songs-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* CSS for each song item */
+.songs-container li {
+  font-size: 16px; /* Larger font size */
+  margin-bottom: 10px; /* More spacing between items */
+  color: #444;
+  display: flex;
+  align-items: center;
+}
+
+/* Add an icon or bullet point before each song */
+.songs-container li::before {
+  margin-right: 8px; /* Space between the bullet and text */
+  color: #007bff; /* Customize the bullet color */
+  font-size: 14px; /* Adjust the size of the bullet */
+}
+
+/* Style the bullet point (you can use an icon or a different symbol) */
+.songs-container li::before {
+  content: '-';
+  font-size: 18px;
+  color: #007bff;
+  margin-right: 10px;
+}

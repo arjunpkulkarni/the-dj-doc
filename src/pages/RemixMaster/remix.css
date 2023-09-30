@@ -22,7 +22,30 @@
 
 .title {
   font-size: 45px;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #333;
+  animation: typing 4s steps(45) forwards, blink-caret 0.5s step-end infinite;
 }
+
+@keyframes typing {
+  from {
+      width: 0;
+  }
+  to {
+      width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from, to {
+      border-color: transparent;
+  }
+  50% {
+      border-color: #333;
+  }
+}
+
 
 /* Style for the buttons */
 .button_open_container{
@@ -33,16 +56,25 @@
   right: 475px
 }
 
+.button_open_container_2{
+  text-align: center; /* Center buttons */
+  margin: 20px 0; /* Add spacing between buttons and other elements */
+  position: absolute;
+  top: 175px;
+  right: 300px
+}
+
 .button_play_container {
   text-align: center; /* Center buttons */
   margin: 20px 0; /* Add spacing between buttons and other elements */
   position: absolute;
   top: 175px;
-  right: 775px;
+  right: 825px;
 }
 
 .button_open,
-.button_play {
+.button_play,
+.button_open_2 {
   display: flex;
   align-items: center; /* Center content vertically */
   justify-content: center; /* Center content horizontally */

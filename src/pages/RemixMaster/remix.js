@@ -16,7 +16,8 @@ const RemixMaster = () => {
         container: "#waveform",
         backend: "WebAudio",
         waveColor: "white",
-        progressColor: "light-blue",
+        progressColor: "blue",
+        interact: false
       });
 
       wavesurfer.load(audioSrc);
@@ -68,7 +69,19 @@ const RemixMaster = () => {
 
       <div className="button_open_container">
         <button onClick={openFileInput} className="button_open">
-          Choose File
+          Choose File 1 
+        </button>
+        <input
+          type="file"
+          accept=".mp3,.wav"
+          onChange={handleFileInputChange}
+          ref={fileInputRef}
+          style={{ display: "none" }}
+        />
+      </div>
+      <div className="button_open_container_2">
+        <button onClick={openFileInput} className="button_open_2">
+          Choose File 2 
         </button>
         <input
           type="file"
@@ -87,6 +100,7 @@ const RemixMaster = () => {
 
       <div className="editor_container">
         <div className="toolbar">
+          <button className="toolbar-button">Cut</button>
           <button className="toolbar-button">Loop</button>
           <button className="toolbar-button">Crossfader</button>
           <button className="toolbar-button">FX</button>

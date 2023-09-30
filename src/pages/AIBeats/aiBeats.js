@@ -61,6 +61,7 @@ const AiBeats = () => {
   const [artistAlbums, setArtistAlbums] = useState([]);
   const [selectedArtist, setSelectedArtist] = useState(null);
   const [albumSongs, setAlbumSongs] = useState([]);
+  const [selectedAlbumTracks, setSelectedAlbumTracks] = useState([]);
 
   useEffect(() => {
     if (window.location.hash) {
@@ -293,10 +294,10 @@ const AiBeats = () => {
     }
   };
 
-  const fetchAlbumSongs = async (albumId) => {
+  const fetchAlbumTracks = async (albumId) => {
     try {
       const accessToken = localStorage.getItem("accessToken"); // Replace with your Spotify access token
-      const apiUrl = `https://api.spotify.com/v1/albums/${albumId}/tracks?limit=10`;
+      const apiUrl = `https://api.spotify.com/v1/albums/${albumId}/tracks?limit=5`;
 
       const response = await axios.get(apiUrl, {
         headers: {
@@ -304,29 +305,34 @@ const AiBeats = () => {
         },
       });
 
-      if (response.data && response.data.items) {
-        const albums = response.data.items;
+      const data = response.data; // You don't need to parse JSON, as Axios already does it
 
-        // Shuffle the albums array to randomize the order
-        const shuffledAlbums = shuffleArray(albums);
+      if (data && data.items) {
+        const tracks = data.items;
 
-        // Take the first 5 albums from the shuffled array
-        const randomAlbums = shuffledAlbums.slice(0, 5);
+        // Shuffle the tracks array to randomize the order
+        const shuffledTracks = shuffleArray(tracks);
 
-        // Log the names of the randomly selected albums
-        randomAlbums.forEach((album) => {
-          console.log("Randomly Selected Album Name:", album.name);
+        // Take the first 5 tracks from the shuffled array
+        const randomTracks = shuffledTracks.slice(0, 5);
+
+        // Log the names of the randomly selected tracks
+        randomTracks.forEach((track) => {
+          console.log("Randomly Selected Track Name:", track.name);
         });
 
-        // You can perform further actions with the randomly selected albums' data here
+        setAlbumSongs(randomTracks);
+        setSelectedAlbumTracks(tracks); // Set the selected album tracks
+
+        // You can perform further actions with the randomly selected tracks' data here
       } else {
         console.error("Invalid response from Spotify API");
       }
     } catch (error) {
       // Handle errors
-      console.error("Error fetching artist albums:", error);
+      console.error("Error fetching album tracks:", error);
     }
-  }
+  };
 
   // Function to shuffle an array randomly
   const shuffleArray = (array) => {
@@ -416,7 +422,7 @@ const AiBeats = () => {
                 {JSON.stringify(preprocessResult(result), null, 2)}
               </pre>
               <div className="related-artists-container">
-                <h2>Related Artists:</h2>
+                <h2>Get Albums of Related Artists:</h2>
                 <ul>
                   {randomArtists.map((artist, index) => (
                     <li key={index}>
@@ -432,16 +438,31 @@ const AiBeats = () => {
               </div>
               {selectedArtist && (
                 <div className="album-container">
-                  <h2>Albums:</h2>
+                  <h2>Get Songs of Related Albums:</h2>
                   <ul>
                     {artistAlbums.map((album) => (
                       <li key={album.id}>
-                        <button className="album-button">{album.name}</button>
+                        <button
+                          className="album-button"
+                          onClick={() => fetchAlbumTracks(album.id)}
+                        >
+                          {album.name}
+                        </button>
                       </li>
                     ))}
                   </ul>
                 </div>
               )}
+            </div>
+          )}
+          {selectedAlbumTracks.length > 0 && (
+            <div className="songs-container">
+              <h2>Songs:</h2>
+              <ul>
+                {selectedAlbumTracks.map((track) => (
+                  <li key={track.id}>{track.name}</li>
+                ))}
+              </ul>
             </div>
           )}
         </div>
